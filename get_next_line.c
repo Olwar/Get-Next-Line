@@ -6,7 +6,7 @@
 /*   By: oairola <oairola@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 10:41:20 by oairola           #+#    #+#             */
-/*   Updated: 2021/12/13 13:57:37 by oairola          ###   ########.fr       */
+/*   Updated: 2021/12/13 15:10:42 by oairola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	read_function(int fd, char **line, char **strsaver)
 	i = 0;
 	while (*line[i] != '\n' && *line[i])
 	{
-		if strsaver[i] != line[i]
+		if (strsaver[i] != line[i])
 			strsaver[i++] = line[i];
 		i++;
 	}
@@ -71,12 +71,17 @@ int	read_function(int fd, char **line, char **strsaver)
 
 int get_next_line(const int fd, char **line)
 {
-	static char *strsaver;
+	static char *strsaver[fd];
 	int flag;
 	
 	if (fd == 1)
+	{
 		input_reader(fd);
-	else
+		return (0);
+	while (1)
+	{
+		strsaver = (static char *)malloc
 		flag = read_function(fd, line, &strsaver);
+	}
 	return (flag);
 }
