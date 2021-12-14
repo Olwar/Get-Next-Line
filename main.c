@@ -1,7 +1,9 @@
 #include "get_next_line.h"
 #include <stdio.h>
 #include <unistd.h>
-#include 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 int main(void)
 {
