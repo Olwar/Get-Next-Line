@@ -31,7 +31,6 @@ int main(void)
 	printf("\n");
 
 
-
 	while (1)
 	{
 		x = get_next_line(fd1, &s);
