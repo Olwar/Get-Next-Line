@@ -4,6 +4,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include "libft/libft.h"
 
 int main(void)
 {
@@ -23,10 +25,11 @@ int main(void)
 	printf("-------\nTesting NULL, supposed -1, **line:\n%d\n", get_next_line(1, 0));
 	printf("-------\nBasic tests, sisalto 1:na ja 0 kun ei uutta linea:\n");
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		x = get_next_line(fd, &s);
 		printf("%d, %s\n", x, s);
+		ft_strclr(s);
 	}
 	printf("\n");
 
@@ -55,11 +58,14 @@ int main(void)
 	printf("supposed first call, %s\n",s);
 	get_next_line(fd3, &s);
 	printf("second call, %s\n",s);
+	ft_strclr(s);
 	get_next_line(fd2, &s);
 	printf("third call, %s\n",s);
 	get_next_line(fd3, &s);
 	printf("fourth call, %s\n",s);
 
+	exit(1);
+	
 	printf("-------\nBIBLE:\n-----------");
 	int i = 0;
 	while (1)
@@ -71,6 +77,7 @@ int main(void)
 			break ;
 		i++;
 	}
+	
 
 	printf("-------\nTesting stdin:\n");
 	while (1)
