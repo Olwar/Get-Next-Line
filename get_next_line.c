@@ -6,7 +6,7 @@
 /*   By: oairola <oairola@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:19:40 by oairola           #+#    #+#             */
-/*   Updated: 2021/12/20 15:04:10 by oairola          ###   ########.fr       */
+/*   Updated: 2021/12/20 15:57:27 by oairola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	check_newl(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != '\n')
@@ -50,7 +52,7 @@ int	reader(int fd, char **line, char *strsaver)
 	i = 0;
 	str = NULL;
 	if (strsaver)
-		str = strsaver;
+		str = ft_strdup(strsaver);
 	if (!check_newl(str))
 	{
 		while(1)
