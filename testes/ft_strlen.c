@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oairola <oairola@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oairola <oairola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 10:43:37 by oairola           #+#    #+#             */
-/*   Updated: 2021/12/14 15:00:17 by oairola          ###   ########.fr       */
+/*   Created: 2021/11/16 10:36:27 by oairola           #+#    #+#             */
+/*   Updated: 2021/11/30 14:03:12 by oairola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define BUFF_SIZE 10
-#define fd_max 8192
+#include "libft.h"
 
-int get_next_line(const int fd, char **line);
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}

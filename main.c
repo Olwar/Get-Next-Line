@@ -25,14 +25,14 @@ int main(void)
 	printf("-------\nTesting NULL, supposed -1, **line:\n%d\n", get_next_line(1, 0));
 	printf("-------\nBasic tests, sisalto 1:na ja 0 kun ei uutta linea:\n");
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		x = get_next_line(fd, &s);
 		printf("%d, %s\n", x, s);
 		ft_strclr(s);
 	}
 	printf("\n");
-
+	exit(1);
 
 	while (1)
 	{
