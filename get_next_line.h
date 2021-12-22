@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define BUFF_SIZE 10
-#define fd_max 8192
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int get_next_line(const int fd, char **line);
+# define BUFF_SIZE 10
+# define FD_MAX 8192
+
+int	get_next_line(const int fd, char **line);
+
+#endif

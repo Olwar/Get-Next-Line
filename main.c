@@ -32,7 +32,6 @@ int main(void)
 		ft_strclr(s);
 	}
 	printf("\n");
-	exit(1);
 
 	while (1)
 	{
@@ -42,7 +41,7 @@ int main(void)
 		if (x <= 0)
 			break ;
 	}
-
+	
 	printf("-------\nTesting empty file, supposed 0,:\n");
 	x = get_next_line(fd4, &s);
 	printf("%d, %s\n", x, s);
@@ -52,7 +51,7 @@ int main(void)
 	printf("%d, %s\n", x, s);
 	x = get_next_line(fd5, &s);
 	printf("%d, %s\n", x, s);	
-
+	
 	printf("-------\nTesting calling diff fd one after another:\n");
 	get_next_line(fd2, &s);
 	printf("supposed first call, %s\n",s);
@@ -63,8 +62,7 @@ int main(void)
 	printf("third call, %s\n",s);
 	get_next_line(fd3, &s);
 	printf("fourth call, %s\n",s);
-
-	exit(1);
+	
 	
 	printf("-------\nBIBLE:\n-----------");
 	int i = 0;
