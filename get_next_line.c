@@ -114,6 +114,7 @@ int	reader(int fd, char **line, char **strsaver)
 	}
 	else
 		ft_strclr(strsaver[fd]);
+	free(str);
 	if (ret == 0)
 		return (0);
 	return (1);

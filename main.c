@@ -63,7 +63,7 @@ int main(void)
 	get_next_line(fd3, &s);
 	printf("fourth call, %s\n",s);
 	
-	
+	exit(1);
 	printf("-------\nBIBLE:\n-----------");
 	int i = 0;
 	while (1)
@@ -76,7 +76,6 @@ int main(void)
 		i++;
 	}
 	
-
 	printf("-------\nTesting stdin:\n");
 	while (1)
 	{
