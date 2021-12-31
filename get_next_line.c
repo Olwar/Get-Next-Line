@@ -109,12 +109,12 @@ int	reader(int fd, char **line, char **strsaver)
 	*line = ft_strsub(str, 0, ft_check_newl(str, 2));
 	if (ft_check_newl(str, 1))
 	{
-		strsaver[fd] = ft_strchr(str, '\n');
+		strsaver[fd] = ft_strchr(str, '\n'); /* ONGELMA: strsaver[fd] ja str samassa osoitteessa, kun poistaa str:n myös strsaver poistuu*/
+
 		strsaver[fd]++;
 	}
 	else
 		ft_strclr(strsaver[fd]);
-	free(str);
 	if (ret == 0)
 		return (0);
 	return (1);
