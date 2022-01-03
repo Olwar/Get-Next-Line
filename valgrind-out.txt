@@ -1,573 +1,1348 @@
-==13850== Memcheck, a memory error detector
-==13850== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==13850== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==13850== Command: ./test_gnl
-==13850== Parent PID: 11397
-==13850== 
---13850-- Valgrind options:
---13850--    --leak-check=full
---13850--    --show-leak-kinds=all
---13850--    --track-origins=yes
---13850--    --verbose
---13850--    --log-file=valgrind-out.txt
---13850-- 
---13850-- Contents of /proc/version:
---13850--   Linux version 5.11.0-43-generic (buildd@lcy02-amd64-036) (gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #47~20.04.2-Ubuntu SMP Mon Dec 13 11:06:56 UTC 2021
---13850-- 
---13850-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---13850-- Page sizes: currently 4096, max supported 4096
---13850-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---13850-- Reading syms from /home/olwar/Desktop/hive/git_get_next_line/test_gnl
---13850-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---13850--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---13850--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
---13850--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---13850--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
---13850--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---13850--   .. CRC is valid
---13850-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---13850--    object doesn't have a symbol table
---13850--    object doesn't have a dynamic symbol table
---13850-- Scheduler: using generic scheduler lock implementation.
---13850-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==13850== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-13850-by-olwar-on-???
-==13850== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-13850-by-olwar-on-???
-==13850== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-13850-by-olwar-on-???
-==13850== 
-==13850== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==13850== don't want to do, unless you know exactly what you're doing,
-==13850== or are doing some strange experiment):
-==13850==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=13850 ...command...
-==13850== 
-==13850== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==13850==   /path/to/gdb ./test_gnl
-==13850== and then give GDB the following command
-==13850==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=13850
-==13850== --pid is optional if only one valgrind process is running
-==13850== 
---13850-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---13850-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---13850-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---13850--    object doesn't have a symbol table
---13850-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---13850--    object doesn't have a symbol table
-==13850== WARNING: new redirection conflicts with existing -- ignoring it
---13850--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---13850--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---13850-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---13850-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---13850-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---13850--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---13850--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
---13850--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---13850--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
---13850--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---13850--   .. CRC is valid
---13850-- REDIR: 0x4900600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4901dd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x491ce60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x491c9a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff2d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x49006c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x491c960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff7f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff3b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900ad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x491e0d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x491c9e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff9a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ff7b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4908d20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x49009d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x491cab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x48ffc60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x49008d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4901e10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x4900a20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---13850-- REDIR: 0x49e8490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---13850-- REDIR: 0x48fa260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---13850-- REDIR: 0x49eb650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401BF4: ft_strlen (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A3A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
---13850-- REDIR: 0x49e82a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401BF4: ft_strlen (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401AC9: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x40161A: ft_check_newl (get_next_line.c:51)
-==13850==    by 0x4017CD: reader (get_next_line.c:102)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
---13850-- REDIR: 0x49e8660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401BF4: ft_strlen (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401C23: ft_strndup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401736: reader (get_next_line.c:89)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401370: main (main.c:50)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401C9A: ft_strndup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401736: reader (get_next_line.c:89)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401370: main (main.c:50)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== HEAP SUMMARY:
-==13850==     in use at exit: 401 bytes in 50 blocks
-==13850==   total heap usage: 51 allocs, 1 frees, 1,425 bytes allocated
-==13850== 
-==13850== Searching for pointers to 50 not-freed blocks
---13850-- REDIR: 0x48fa850 (libc.so.6:free) redirected to 0x483c9d0 (free)
-==13850== Checked 140,888 bytes
-==13850== 
-==13850== 1 bytes in 1 blocks are definitely lost in loss record 1 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x4014C0: ft_strjoin_eof (get_next_line.c:24)
-==13850==    by 0x40179B: reader (get_next_line.c:99)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850== 
-==13850== 1 bytes in 1 blocks are definitely lost in loss record 2 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401370: main (main.c:50)
-==13850== 
-==13850== 1 bytes in 1 blocks are definitely lost in loss record 3 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4016DB: reader (get_next_line.c:80)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x40139A: main (main.c:52)
-==13850== 
-==13850== 1 bytes in 1 blocks are definitely lost in loss record 4 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x4014C0: ft_strjoin_eof (get_next_line.c:24)
-==13850==    by 0x40179B: reader (get_next_line.c:99)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x40139A: main (main.c:52)
-==13850== 
-==13850== 1 bytes in 1 blocks are definitely lost in loss record 5 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x40139A: main (main.c:52)
-==13850== 
-==13850== 2 bytes in 1 blocks are possibly lost in loss record 6 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401C57: ft_strndup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401736: reader (get_next_line.c:89)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401370: main (main.c:50)
-==13850== 
-==13850== 5 bytes in 1 blocks are possibly lost in loss record 7 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x4014C0: ft_strjoin_eof (get_next_line.c:24)
-==13850==    by 0x40179B: reader (get_next_line.c:99)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850== 
-==13850== 9 bytes in 1 blocks are definitely lost in loss record 8 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4016DB: reader (get_next_line.c:80)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401456: main (main.c:63)
-==13850== 
-==13850== 10 bytes in 1 blocks are definitely lost in loss record 9 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4016DB: reader (get_next_line.c:80)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x40142F: main (main.c:61)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 10 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 11 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 12 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401AF1: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 13 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 14 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 15 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 16 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x4014C0: ft_strjoin_eof (get_next_line.c:24)
-==13850==    by 0x40179B: reader (get_next_line.c:99)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x40142F: main (main.c:61)
-==13850== 
-==13850== 11 bytes in 1 blocks are definitely lost in loss record 17 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x40142F: main (main.c:61)
-==13850== 
-==13850== 12 bytes in 1 blocks are still reachable in loss record 18 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401456: main (main.c:63)
-==13850== 
-==13850== 12 bytes in 1 blocks are definitely lost in loss record 19 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850== 
-==13850== 12 bytes in 1 blocks are definitely lost in loss record 20 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x4014C0: ft_strjoin_eof (get_next_line.c:24)
-==13850==    by 0x40179B: reader (get_next_line.c:99)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401456: main (main.c:63)
-==13850== 
-==13850== 15 bytes in 6 blocks are definitely lost in loss record 21 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4016DB: reader (get_next_line.c:80)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850== 
-==13850== 17 bytes in 1 blocks are possibly lost in loss record 22 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401AF1: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850== 
-==13850== 18 bytes in 4 blocks are definitely lost in loss record 23 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401CE1: ft_strnew (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A4A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4016DB: reader (get_next_line.c:80)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850== 
-==13850== 19 bytes in 2 blocks are definitely lost in loss record 24 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x4014C0: ft_strjoin_eof (get_next_line.c:24)
-==13850==    by 0x40179B: reader (get_next_line.c:99)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850== 
-==13850== 21 bytes in 1 blocks are possibly lost in loss record 25 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401AF1: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850== 
-==13850== 21 bytes in 1 blocks are possibly lost in loss record 26 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401AF1: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850== 
-==13850== 25 bytes in 7 blocks are definitely lost in loss record 27 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850== 
-==13850== 51 bytes in 3 blocks are definitely lost in loss record 28 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401AF1: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850== 
-==13850== 59 bytes in 5 blocks are definitely lost in loss record 29 of 29
-==13850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==13850==    by 0x401D53: ft_strsub (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x40181A: reader (get_next_line.c:109)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850== 
-==13850== LEAK SUMMARY:
-==13850==    definitely lost: 323 bytes in 44 blocks
-==13850==    indirectly lost: 0 bytes in 0 blocks
-==13850==      possibly lost: 66 bytes in 5 blocks
-==13850==    still reachable: 12 bytes in 1 blocks
-==13850==         suppressed: 0 bytes in 0 blocks
-==13850== 
-==13850== ERROR SUMMARY: 53 errors from 41 contexts (suppressed: 0 from 0)
-==13850== 
-==13850== 1 errors in context 1 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 2 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013FF: main (main.c:58)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 3 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 4 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4013D8: main (main.c:56)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 5 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401C9A: ft_strndup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401736: reader (get_next_line.c:89)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401370: main (main.c:50)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 6 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401BF4: ft_strlen (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401C23: ft_strndup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401736: reader (get_next_line.c:89)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401370: main (main.c:50)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 7 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 8 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x4012E3: main (main.c:38)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 9 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x40161A: ft_check_newl (get_next_line.c:51)
-==13850==    by 0x4017CD: reader (get_next_line.c:102)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 1 errors in context 10 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401A92: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 4 errors in context 11 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401BF4: ft_strlen (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401A3A: ft_strdup (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401748: reader (get_next_line.c:91)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 4 errors in context 12 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401B9D: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== 
-==13850== 7 errors in context 13 of 41:
-==13850== Conditional jump or move depends on uninitialised value(s)
-==13850==    at 0x401BF4: ft_strlen (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x401AC9: ft_strjoin (in /home/olwar/Desktop/hive/git_get_next_line/test_gnl)
-==13850==    by 0x4017B1: reader (get_next_line.c:101)
-==13850==    by 0x40190C: get_next_line (get_next_line.c:128)
-==13850==    by 0x401291: main (main.c:30)
-==13850==  Uninitialised value was created by a stack allocation
-==13850==    at 0x401690: reader (get_next_line.c:68)
-==13850== 
-==13850== ERROR SUMMARY: 53 errors from 41 contexts (suppressed: 0 from 0)
+==844== Memcheck, a memory error detector
+==844== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==844== Using Valgrind-3.19.0.GIT-lbmacos-da51a738a7-20211224 and LibVEX; rerun with -h for copyright info
+==844== Command: ./test_gnl
+==844== Parent PID: 68956
+==844== 
+--844-- 
+--844-- Valgrind options:
+--844--    --leak-check=full
+--844--    --show-leak-kinds=all
+--844--    --track-origins=yes
+--844--    --verbose
+--844--    --log-file=valgrind-out.txt
+--844-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--844--   Darwin Kernel Version 18.7.0: Tue Jun 22 19:37:08 PDT 2021; root:xnu-4903.278.70~1/RELEASE_X86_64
+--844-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--844-- Page sizes: currently 4096, max supported 4096
+--844-- Valgrind library directory: /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind
+--844-- ./test_gnl (rx at 0x100000000, rw at 0x100002000)
+--844--    reading syms   from primary file (16 30)
+--844--    dSYM= ./test_gnl.dSYM/Contents/Resources/DWARF/test_gnl
+--844--    dSYM does not have correct UUID (out of date?)
+--844-- run: /usr/bin/dsymutil "./test_gnl"
+--844--    dsyms= ./test_gnl.dSYM/Contents/Resources/DWARF/test_gnl
+--844--    reading dwarf3 from dsyms file
+--844-- /usr/lib/dyld (rx at 0x100014000, rw at 0x10007f000)
+--844--    reading syms   from primary file (5 2133)
+--844-- Scheduler: using generic scheduler lock implementation.
+--844-- Reading suppressions file: /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/default.supp
+==844== embedded gdbserver: reading from /var/folders/zz/zyxvpxvq6csfxvn_n0000lsr0004yf/T//vgdb-pipe-from-vgdb-to-844-by-oairola-on-???
+==844== embedded gdbserver: writing to   /var/folders/zz/zyxvpxvq6csfxvn_n0000lsr0004yf/T//vgdb-pipe-to-vgdb-from-844-by-oairola-on-???
+==844== embedded gdbserver: shared mem   /var/folders/zz/zyxvpxvq6csfxvn_n0000lsr0004yf/T//vgdb-pipe-shared-mem-vgdb-844-by-oairola-on-???
+==844== 
+==844== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==844== don't want to do, unless you know exactly what you're doing,
+==844== or are doing some strange experiment):
+==844==   /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/../../bin/vgdb --pid=844 ...command...
+==844== 
+==844== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==844==   /path/to/gdb ./test_gnl
+==844== and then give GDB the following command
+==844==   target remote | /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/../../bin/vgdb --pid=844
+==844== --pid is optional if only one valgrind process is running
+==844== 
+--844-- REDIR: 0x100055120 (dyld:strcmp) redirected to 0x2580582c7 (???)
+--844-- REDIR: 0x10004f5f6 (dyld:arc4random) redirected to 0x258058365 (???)
+--844-- REDIR: 0x100054500 (dyld:strlen) redirected to 0x258058296 (???)
+--844-- REDIR: 0x100055420 (dyld:strcpy) redirected to 0x2580582e3 (???)
+--844-- REDIR: 0x1000526f0 (dyld:strcat) redirected to 0x2580582a7 (???)
+--844-- REDIR: 0x1000542f0 (dyld:strlcat) redirected to 0x258058300 (???)
+--844-- /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x1000df000, rw at 0x1000e3000)
+--844--    reading syms   from primary file (3 52)
+--844--    dSYM= /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--844-- /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x1000e6000, rw at 0x1000ed000)
+--844--    reading syms   from primary file (75 61)
+--844--    dSYM= /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--844-- /usr/lib/libSystem.B.dylib (rx at 0x1000f2000, rw at 0x1000f4000)
+--844--    reading syms   from primary file (29 7)
+--844-- /usr/lib/system/libcache.dylib (rx at 0x1000f9000, rw at 0x1000fe000)
+--844--    reading syms   from primary file (32 28)
+--844-- /usr/lib/system/libcommonCrypto.dylib (rx at 0x100103000, rw at 0x10010e000)
+--844--    reading syms   from primary file (222 164)
+--844-- /usr/lib/system/libcompiler_rt.dylib (rx at 0x10011b000, rw at 0x100123000)
+--844--    reading syms   from primary file (510 8)
+--844-- /usr/lib/system/libcopyfile.dylib (rx at 0x100130000, rw at 0x10013a000)
+--844--    reading syms   from primary file (11 37)
+--844-- /usr/lib/system/libcorecrypto.dylib (rx at 0x100140000, rw at 0x1001c6000)
+--844--    reading syms   from primary file (525 697)
+--844-- /usr/lib/system/libdispatch.dylib (rx at 0x1001e2000, rw at 0x10021c000)
+--844--    reading syms   from primary file (300 878)
+--844-- /usr/lib/system/libdyld.dylib (rx at 0x10024c000, rw at 0x100279000)
+--844--    reading syms   from primary file (107 1127)
+--844-- /usr/lib/system/libkeymgr.dylib (rx at 0x100297000, rw at 0x100298000)
+--844--    reading syms   from primary file (11 2)
+--844-- /usr/lib/system/libmacho.dylib (rx at 0x1002a3000, rw at 0x1002a9000)
+--844--    reading syms   from primary file (105 2)
+--844-- /usr/lib/system/libquarantine.dylib (rx at 0x1002af000, rw at 0x1002b2000)
+--844--    reading syms   from primary file (71 12)
+--844-- /usr/lib/system/libremovefile.dylib (rx at 0x1002b8000, rw at 0x1002ba000)
+--844--    reading syms   from primary file (12 6)
+--844-- /usr/lib/system/libsystem_asl.dylib (rx at 0x1002bf000, rw at 0x1002d7000)
+--844--    reading syms   from primary file (220 227)
+--844-- /usr/lib/system/libsystem_blocks.dylib (rx at 0x1002e4000, rw at 0x1002e5000)
+--844--    reading syms   from primary file (21 7)
+--844-- /usr/lib/system/libsystem_c.dylib (rx at 0x1002e9000, rw at 0x100371000)
+--844--    reading syms   from primary file (1342 803)
+--844-- /usr/lib/system/libsystem_configuration.dylib (rx at 0x100399000, rw at 0x10039d000)
+--844--    reading syms   from primary file (38 64)
+--844-- /usr/lib/system/libsystem_coreservices.dylib (rx at 0x1003a3000, rw at 0x1003a7000)
+--844--    reading syms   from primary file (14 43)
+--844-- /usr/lib/system/libsystem_darwin.dylib (rx at 0x1003ac000, rw at 0x1003b3000)
+--844--    reading syms   from primary file (40 331)
+--844-- /usr/lib/system/libsystem_dnssd.dylib (rx at 0x1003bd000, rw at 0x1003c4000)
+--844--    reading syms   from primary file (39 34)
+--844-- /usr/lib/system/libsystem_info.dylib (rx at 0x1003c9000, rw at 0x100415000)
+--844--    reading syms   from primary file (426 719)
+--844-- /usr/lib/system/libsystem_m.dylib (rx at 0x10042b000, rw at 0x100477000)
+--844--    reading syms   from primary file (811 1)
+--844-- /usr/lib/system/libsystem_malloc.dylib (rx at 0x100485000, rw at 0x1004b0000)
+--844--    reading syms   from primary file (156 420)
+--844-- /usr/lib/system/libsystem_networkextension.dylib (rx at 0x1004bf000, rw at 0x1004ca000)
+--844--    reading syms   from primary file (99 180)
+--844-- /usr/lib/system/libsystem_notify.dylib (rx at 0x1004d5000, rw at 0x1004dd000)
+--844--    reading syms   from primary file (23 1)
+--844-- /usr/lib/system/libsystem_sandbox.dylib (rx at 0x1004e3000, rw at 0x1004e7000)
+--844--    reading syms   from primary file (100 13)
+--844-- /usr/lib/system/libsystem_secinit.dylib (rx at 0x1004ed000, rw at 0x1004f0000)
+--844--    reading syms   from primary file (4 7)
+--844-- /usr/lib/system/libsystem_kernel.dylib (rx at 0x1004f5000, rw at 0x10051e000)
+--844--    reading syms   from primary file (1307 120)
+--844-- /usr/lib/system/libsystem_platform.dylib (rx at 0x100538000, rw at 0x100542000)
+--844--    reading syms   from primary file (166 105)
+--844-- /usr/lib/system/libsystem_pthread.dylib (rx at 0x10054a000, rw at 0x100555000)
+--844--    reading syms   from primary file (186 99)
+--844-- /usr/lib/system/libsystem_symptoms.dylib (rx at 0x10055f000, rw at 0x100567000)
+--844--    reading syms   from primary file (10 89)
+--844-- /usr/lib/system/libsystem_trace.dylib (rx at 0x10056d000, rw at 0x100583000)
+--844--    reading syms   from primary file (128 237)
+--844-- /usr/lib/system/libunwind.dylib (rx at 0x100592000, rw at 0x100598000)
+--844--    reading syms   from primary file (102 52)
+--844-- /usr/lib/system/libxpc.dylib (rx at 0x10059f000, rw at 0x1005cf000)
+--844--    reading syms   from primary file (590 928)
+--844-- /usr/lib/libobjc.A.dylib (rx at 0x1005f2000, rw at 0x100d78000)
+--844--    reading syms   from primary file (360 900)
+--844-- /usr/lib/libc++abi.dylib (rx at 0x100f2f000, rw at 0x100f45000)
+--844--    reading syms   from primary file (375 604)
+--844-- /usr/lib/libc++.1.dylib (rx at 0x100f5b000, rw at 0x100faf000)
+--844--    reading syms   from primary file (2023 1671)
+--844-- REDIR: 0x100539740 (libsystem_platform.dylib:_platform_memcmp) redirected to 0x1000e9c53 (_platform_memcmp)
+--844-- REDIR: 0x100539fc0 (libsystem_platform.dylib:_platform_strncmp) redirected to 0x1000e95ed (_platform_strncmp)
+--844-- REDIR: 0x10053a360 (libsystem_platform.dylib:_platform_strcmp) redirected to 0x1000e9667 (_platform_strcmp)
+--844-- REDIR: 0x1004893a6 (libsystem_malloc.dylib:calloc) redirected to 0x1000e7f36 (calloc)
+--844-- REDIR: 0x10048952c (libsystem_malloc.dylib:malloc_default_zone) redirected to 0x1000e8c61 (malloc_default_zone)
+--844-- REDIR: 0x100486c32 (libsystem_malloc.dylib:malloc_zone_malloc) redirected to 0x1000e7b88 (malloc_zone_malloc)
+--844-- REDIR: 0x1004893e1 (libsystem_malloc.dylib:malloc_zone_calloc) redirected to 0x1000e8122 (malloc_zone_calloc)
+--844-- REDIR: 0x100486bfd (libsystem_malloc.dylib:malloc) redirected to 0x1000e7920 (malloc)
+--844-- REDIR: 0x100489536 (libsystem_malloc.dylib:malloc_zone_from_ptr) redirected to 0x1000e8ca2 (malloc_zone_from_ptr)
+--844-- REDIR: 0x100489839 (libsystem_malloc.dylib:free) redirected to 0x1000e7cfc (free)
+--844-- REDIR: 0x10048c87d (libsystem_malloc.dylib:realloc) redirected to 0x1000e82b4 (realloc)
+--844-- REDIR: 0x10053a1a0 (libsystem_platform.dylib:_platform_strchr$VARIANT$Haswell) redirected to 0x1000e8f13 (_platform_strchr$VARIANT$Haswell)
+--844-- REDIR: 0x10053a6c0 (libsystem_platform.dylib:_platform_memchr$VARIANT$Haswell) redirected to 0x1000e96e8 (_platform_memchr$VARIANT$Haswell)
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001ADF: ft_strlen (in ./test_gnl)
+==844==    by 0x10000191B: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001ADF: ft_strlen (in ./test_gnl)
+==844==    by 0x1000019C8: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001AD8: ft_strlen (in ./test_gnl)
+==844==    by 0x1000019D6: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Address 0x10101acc0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Address 0x10101acc0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A35: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Address 0x10101acc0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x1000013CA: ft_check_newl (get_next_line.c:51)
+==844==    by 0x100001615: reader (get_next_line.c:117)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Address 0x10101b760 is 0 bytes inside a block of size 1 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x1000014A9: reader (get_next_line.c:83)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001ADF: ft_strlen (in ./test_gnl)
+==844==    by 0x100001B20: ft_strndup (in ./test_gnl)
+==844==    by 0x10000150C: reader (get_next_line.c:92)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x1000010E0: main (main.c:50)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001B9B: ft_strndup (in ./test_gnl)
+==844==    by 0x10000150C: reader (get_next_line.c:92)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x1000010E0: main (main.c:50)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Address 0x10101bdf0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A35: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Address 0x10101bdf0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Address 0x10101bf90 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844== 
+==844== Invalid read of size 1
+==844==    at 0x100001A35: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Address 0x10101bf90 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844== 
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== HEAP SUMMARY:
+==844==     in use at exit: 23,285 bytes in 169 blocks
+==844==   total heap usage: 262 allocs, 93 frees, 32,267 bytes allocated
+==844== 
+==844== Searching for pointers to 169 not-freed blocks
+==844== Checked 10,489,816 bytes
+==844== 
+==844== 14 bytes in 1 blocks are still reachable in loss record 1 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10034A518: __setenv_locked (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10034A91A: setenv (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x1005A1099: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026E04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==844==    by 0x10001671E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==844== 
+==844== 16 bytes in 1 blocks are still reachable in loss record 2 of 46
+==844==    at 0x1000E81B1: malloc_zone_calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5B5A: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F4AB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 24 bytes in 1 blocks are still reachable in loss record 3 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 24 bytes in 1 blocks are still reachable in loss record 4 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F4A91: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 24 bytes in 1 blocks are still reachable in loss record 5 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F61A8: _mapStrHash(_NXMapTable*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F4F3C: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 24 bytes in 1 blocks are still reachable in loss record 6 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F7417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060B067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 24 bytes in 1 blocks are possibly lost in loss record 7 of 46
+==844==    at 0x1000E81B1: malloc_zone_calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5DE3: freeBuckets(NXHashTable*, int) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5EC7: remapClass(objc_class*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5E1E: TimeLogger::log(char const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5AFE: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F589C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 8 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F59EF: isEqualPrototype(void const*, void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F589C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 9 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5A10: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F589C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 10 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5AD4: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F589C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 11 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5902: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 12 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F59EF: isEqualPrototype(void const*, void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F4AB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 13 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5AD4: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F4AB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 32 bytes in 1 blocks are still reachable in loss record 14 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5902: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F7417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060B067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 40 bytes in 1 blocks are still reachable in loss record 15 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F84EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4EF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1005A1201: xpc_array_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0CB3: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026E04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==844== 
+==844== 48 bytes in 1 blocks are still reachable in loss record 16 of 46
+==844==    at 0x1000E81B1: malloc_zone_calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5E94: remapClass(objc_class*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5E1E: TimeLogger::log(char const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5AFE: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F59BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F589C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100611646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F40F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F393B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844== 
+==844== 48 bytes in 1 blocks are still reachable in loss record 17 of 46
+==844==    at 0x1000E81B1: malloc_zone_calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5E94: remapClass(objc_class*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5E1E: TimeLogger::log(char const*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5921: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F7417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060B067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 48 bytes in 2 blocks are still reachable in loss record 18 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F3742: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1000F39C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844== 
+==844== 48 bytes in 2 blocks are possibly lost in loss record 19 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F3742: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1000F39C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844== 
+==844== 56 bytes in 1 blocks are still reachable in loss record 20 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F84EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4EF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1005B4624: _xpc_pipe_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1460: _xpc_create_bootstrap_pipe (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0FF8: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 64 bytes in 1 blocks are still reachable in loss record 21 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 64 bytes in 1 blocks are still reachable in loss record 22 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844== 
+==844== 64 bytes in 1 blocks are still reachable in loss record 23 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005A1294: _xpc_calloc (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1218: xpc_array_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0CB3: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026E04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==844==    by 0x10001671E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==844== 
+==844== 64 bytes in 1 blocks are indirectly lost in loss record 24 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10034A221: _owned_ptr_alloc (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10034A8EC: setenv (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x1005A1099: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026E04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==844==    by 0x10001671E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==844== 
+==844== 64 bytes in 1 blocks are definitely lost in loss record 25 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 64 bytes in 1 blocks are definitely lost in loss record 26 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 27 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10034A20F: _owned_ptr_alloc (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10034A8EC: setenv (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x1005A1099: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026E04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==844==    by 0x10001671E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==844== 
+==844== 120 bytes in 1 blocks are definitely lost in loss record 28 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F84EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4EF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001EA2F6: _dispatch_lane_create_with_target (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x10056EC73: _libtrace_init (in /usr/lib/system/libsystem_trace.dylib)
+==844==    by 0x1000F39CE: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026E04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==844== 
+==844== 192 bytes in 3 blocks are still reachable in loss record 29 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1000F39C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844== 
+==844== 192 bytes in 3 blocks are still reachable in loss record 30 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 256 bytes in 4 blocks are definitely lost in loss record 31 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 256 bytes in 4 blocks are definitely lost in loss record 32 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 280 bytes in 2 blocks are indirectly lost in loss record 33 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005A1AB8: _xpc_malloc (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1973: _xpc_dictionary_insert (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1CE9: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x100018873: dyld::registerLoadCallback(void (*)(mach_header const*, char const*, bool)) (in /usr/lib/dyld)
+==844==    by 0x1005A1BA1: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1002: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 280 bytes in 7 blocks are indirectly lost in loss record 34 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100341C03: strdup (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x1005A1732: xpc_string_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1704: xpc_dictionary_set_string (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1579: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 280 bytes in 7 blocks are indirectly lost in loss record 35 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F84EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4EF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1005BB48B: _xpc_string_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A174D: xpc_string_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1704: xpc_dictionary_set_string (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1579: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 367 bytes in 7 blocks are indirectly lost in loss record 36 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005A1AB8: _xpc_malloc (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1973: _xpc_dictionary_insert (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1715: xpc_dictionary_set_string (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1579: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 472 (192 direct, 280 indirect) bytes in 1 blocks are definitely lost in loss record 37 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F84EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4EF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1005A1692: xpc_dictionary_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1C80: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x100018873: dyld::registerLoadCallback(void (*)(mach_header const*, char const*, bool)) (in /usr/lib/dyld)
+==844==    by 0x1005A1BA1: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A1002: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 528 bytes in 1 blocks are possibly lost in loss record 38 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5968: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F7417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060B067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== 736 bytes in 1 blocks are definitely lost in loss record 39 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10030CCC0: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10030CE1C: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x1005F4A24: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 1,119 (192 direct, 927 indirect) bytes in 1 blocks are definitely lost in loss record 40 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F84EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4EF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1005A1692: xpc_dictionary_create (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A154D: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1005A0FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==844==    by 0x1000F39C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844==    by 0x10002C591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x10002C797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==844==    by 0x100027BE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100027B7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844==    by 0x100026D72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==844== 
+==844== 2,064 bytes in 1 blocks are possibly lost in loss record 41 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F5968: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F4A91: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 2,064 bytes in 1 blocks are possibly lost in loss record 42 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F6845: objc_class::setHasCustomRR(bool) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F670F: addSubclass(objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5021: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 3,008 bytes in 47 blocks are definitely lost in loss record 43 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1000F39C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==844== 
+==844== 3,008 bytes in 47 blocks are definitely lost in loss record 44 of 46
+==844==    at 0x1000E7FF0: calloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x10060A98C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F3A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060655F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10001947A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==844==    by 0x10001962D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==844==    by 0x10024DA26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==844==    by 0x1005F3233: environ_init (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1001E4E35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==844==    by 0x1001F0AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==844== 
+==844== 4,096 bytes in 1 blocks are definitely lost in loss record 45 of 46
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100326DE8: __smakebuf (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10033A89C: __swsetup (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10035403E: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x10032BE21: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x100329F71: printf (in /usr/lib/system/libsystem_c.dylib)
+==844==    by 0x100000F94: main (main.c:24)
+==844== 
+==844== 4,112 bytes in 1 blocks are possibly lost in loss record 46 of 46
+==844==    at 0x1000E7C0A: malloc_zone_malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1005F6845: objc_class::setHasCustomRR(bool) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F670F: addSubclass(objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1006116A8: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x100601E29: updateCustomRR_AWZ(objc_class*, method_t*) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F6EC4: addMethod(objc_class*, objc_selector*, void (*)(), char const*, bool) (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AFDE: realizeAllClasses() (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x10060AA6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==844==    by 0x1005F5266: _read_images (in /usr/lib/libobjc.A.dylib)
+==844== 
+==844== LEAK SUMMARY:
+==844==    definitely lost: 12,008 bytes in 110 blocks
+==844==    indirectly lost: 1,271 bytes in 24 blocks
+==844==      possibly lost: 8,840 bytes in 7 blocks
+==844==    still reachable: 1,166 bytes in 28 blocks
+==844==         suppressed: 0 bytes in 0 blocks
+==844== 
+==844== ERROR SUMMARY: 189 errors from 39 contexts (suppressed: 398 from 10)
+==844== 
+==844== 1 errors in context 1 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 2 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 3 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 4 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 5 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001B9B: ft_strndup (in ./test_gnl)
+==844==    by 0x10000150C: reader (get_next_line.c:92)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x1000010E0: main (main.c:50)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 6 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001ADF: ft_strlen (in ./test_gnl)
+==844==    by 0x100001B20: ft_strndup (in ./test_gnl)
+==844==    by 0x10000150C: reader (get_next_line.c:92)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x1000010E0: main (main.c:50)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 7 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 8 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Address 0x10101b760 is 0 bytes inside a block of size 1 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x1000014A9: reader (get_next_line.c:83)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844== 
+==844== 
+==844== 1 errors in context 9 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001033: main (main.c:38)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 10 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x1000013CA: ft_check_newl (get_next_line.c:51)
+==844==    by 0x100001615: reader (get_next_line.c:117)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 1 errors in context 11 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x10000195A: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 4 errors in context 12 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001ADF: ft_strlen (in ./test_gnl)
+==844==    by 0x10000191B: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 4 errors in context 13 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001A67: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 7 errors in context 14 of 39:
+==844== Conditional jump or move depends on uninitialised value(s)
+==844==    at 0x100001ADF: ft_strlen (in ./test_gnl)
+==844==    by 0x1000019C8: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Uninitialised value was created by a stack allocation
+==844==    at 0x100001440: reader (get_next_line.c:68)
+==844== 
+==844== 
+==844== 10 errors in context 15 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A35: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Address 0x10101bf90 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844== 
+==844== 
+==844== 10 errors in context 16 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A35: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Address 0x10101bdf0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844== 
+==844== 
+==844== 11 errors in context 17 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Address 0x10101bf90 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100001181: main (main.c:60)
+==844== 
+==844== 
+==844== 11 errors in context 18 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Address 0x10101bdf0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x10000114E: main (main.c:57)
+==844== 
+==844== 
+==844== 24 errors in context 19 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A35: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Address 0x10101acc0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844== 
+==844== 
+==844== 28 errors in context 20 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001A20: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Address 0x10101acc0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844== 
+==844== 
+==844== 51 errors in context 21 of 39:
+==844== Invalid read of size 1
+==844==    at 0x100001AD8: ft_strlen (in ./test_gnl)
+==844==    by 0x1000019D6: ft_strjoin (in ./test_gnl)
+==844==    by 0x1000015F0: reader (get_next_line.c:114)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Address 0x10101acc0 is 0 bytes inside a block of size 11 free'd
+==844==    at 0x1000E7D6D: free (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x1000015E3: reader (get_next_line.c:113)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844==  Block was alloc'd at
+==844==    at 0x1000E7995: malloc (in /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==844==    by 0x100001C30: ft_strnew (in ./test_gnl)
+==844==    by 0x100001929: ft_strdup (in ./test_gnl)
+==844==    by 0x10000151E: reader (get_next_line.c:94)
+==844==    by 0x100001759: get_next_line (get_next_line.c:146)
+==844==    by 0x100000FE4: main (main.c:30)
+==844== 
+--844-- 
+--844-- used_suppression:      2 OSX1014:dyld-3 /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/default.supp:742
+--844-- used_suppression:      2 OSX1014:dyld-6 /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/default.supp:764
+--844-- used_suppression:    394 OSX1014:dyld-1 /Users/oairola/.brew/Cellar/valgrind/HEAD-da51a73/libexec/valgrind/default.supp:726
+==844== 
+==844== ERROR SUMMARY: 189 errors from 39 contexts (suppressed: 398 from 10)
