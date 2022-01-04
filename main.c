@@ -77,7 +77,7 @@ int main(void)
 			break ;
 		i++;
 	}
-	
+	exit(1);
 	printf("-------\nTesting stdin:\n");
 	while (1)
 	{
