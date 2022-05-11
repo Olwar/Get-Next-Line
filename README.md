@@ -1,4 +1,5 @@
 # Get-Next-Line
+This c function will simply give you the next line in a file
 
 Usage:
 1. Add #include "get_next_line.h" to your .c -file
